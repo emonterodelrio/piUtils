@@ -1,0 +1,15 @@
+#!/bin/bash
+
+DIR="/home/pi/camera/"
+mkdir -p $DIR
+
+echo
+echo
+if [ "$(df -h | grep root | awk '{print $5}' | cut -d% -f1)" -lt 90 ]; then
+  DATE=$(date +"%Y-%m-%d_%H%M%S")
+  echo "$DATE.jpg Usage: $(df -h | grep root | awk '{print $5}')"
+  raspistill -o ${DIR}$DATE.jpg
+  sleep 1;
+else
+  echo Disk is full!
+fi

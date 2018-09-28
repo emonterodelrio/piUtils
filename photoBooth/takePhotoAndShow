@@ -1,0 +1,14 @@
+#!/bin/bash
+
+DIR="/tmp/"
+mkdir -p $DIR
+
+DATE=$(date +"%Y-%m-%d_%H%M")
+
+raspistill -o test.jpg
+
+sudo fbi -T 2 -d /dev/fb1 -noverbose -a test.jpg
+sleep 10 
+
+sudo pkill fbi
+
