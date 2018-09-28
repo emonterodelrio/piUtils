@@ -8,6 +8,7 @@ from time import sleep
 import Adafruit_DHT
 import requests
 
+api_keys = ["", "", "", ""]
 
 myDelay = 900 #how many seconds between posting data
 
