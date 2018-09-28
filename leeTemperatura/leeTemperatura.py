@@ -11,7 +11,7 @@ from Adafruit_BMP085 import BMP085
 
 api_keys = ["", "", "", ""]
 
-myDelay = 900 #how many seconds between posting data
+myDelay = 90 #how many seconds between posting data
 
 #Sensors
 #sensor = Adafruit_DHT.DHT11
@@ -63,6 +63,7 @@ def main():
       hum, temp, temp2, prs, alt = readTempHumHPa()
       print "Sending\t\t\t\t\tt = " + str(temp)+ "ºC \t\th =  " + str(hum) + " %\t\t" + str(temp2) + " ºC\t\t" + str(prs) + " hPa\t\t" + str(alt) + " m"
       for key in range(len(api_keys)):
+        print "url = \"https://api.thingspeak.com/update?api_key=" + api_keys[key] + "&field1=" + str(hum) + "&field2=" + str(temp) + "&field3=" + str(temp2) + "&field4=" + str(prs) + "&field5=" + str(alt)
         url = "https://api.thingspeak.com/update?api_key=" + api_keys[key] + "&field1=" + str(hum) + "&field2=" + str(temp) + "&field3=" + str(temp2) + "&field4=" + str(prs) + "&field5=" + str(alt)
         r = requests.get(url)
         r.json()
