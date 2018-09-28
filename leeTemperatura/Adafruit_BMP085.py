@@ -247,7 +247,7 @@ class BMP085 :
 
     return p
 
-  def readAltitude(self, seaLevelPressure=101325):
+  def readAltitude(self, seaLevelPressure=101350):
     "Calculates the altitude in meters"
     altitude = 0.0
     pressure = float(self.readPressure())
