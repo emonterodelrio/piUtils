@@ -11,18 +11,26 @@ fi
 
 if [ `whoami` = root ]; then
 
-
-  printf "\033[1;32m\n\n Updating apt-get\033[0m\n"
-
-  apt-get update
+  printf "\033[1;32m\n\nAuto cd to scripts \033[0m\n"
+  if [ -z $(cat /home/pi/.bashrc | grep "\/home\/pi\/Desktop\/scripts") ]; then
+    echo "cd /home/pi/Desktop/scripts" >> /home/pi/.bashrc
+  fi
+	  
+  printf "\033[1;32m\n\nDisable bluetooth\033[0m\n"
+  if [ -z $( cat /boot/config.txt | grep "disable-bt" ) ]; then
+    echo "dtoverlay=pi3-disable-bt" >> /boot/config.txt
+  fi
+    
+  printf "\033[1;32m\n\nUpdating apt-get\033[0m\n"
+  sudo apt-get update
   sleep 2
   echo
-  printf "\033[1;32m\n\Install curl, vim, telnet....\033[0m\n"
-  apt-get install vim curl telnet
+  printf "\033[1;32m\nInstall curl, vim, telnet....\033[0m\n"
+  apt-get install -y vim curl telnet
   sleep 2
-
+   
   printf "\033[1;32m\n\nInstall pip, setup tools and wheel\033[0m\n"
-  apt-get install python-pip
+  apt-get install -y python-pip
   sleep 2
   python -m pip install --upgrade pip setuptools wheel
 
@@ -56,6 +64,10 @@ fi
 
 printf "\033[1;32m\n\necho Setting port at leeTemperatura.py\033[0m\n"
 sed -i "/pin = /c\pin = ${PIN}" /home/pi/Desktop/scripts/leeTemperatura/leeTemperatura.py
+
+printf "\033[1;32m\n\necho Chmod chown all scripts\033[0m\n"
+chmod -R 777 /home/pi/Desktop/scripts
+chown -R pi:pi /home/pi/Desktop/scripts
 
 
 printf "\033[1;32m\n\n#######################\nNow insert your thinkiverse api keys at:\nvi /home/pi/Desktop/scripts/leeTemperatura/leeTemperatura.py\033[0m\n"
