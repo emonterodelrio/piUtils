@@ -50,11 +50,11 @@ if [ `whoami` = root ]; then
 
   printf "\033[1;32m\n\nSetting up crontabs\033[0m\n"
   if [ -z "$(crontab -l -u pi | grep leeTemperatura)" ];then
-    echo "* * * * * bash -c 'if [ ! \"\$(ps aux | grep leeTemperatura.py | grep -v grep)\" ]; then cd /home/pi/Desktop/scripts/leeTemperatura/ && nohup  ./leeTemperatura.py &>> /home/pi/Desktop/scripts/logs/leeTemperatura/leeTemperatura.log; fi'" >> /var/spool/cron/crontabs/pi
+    echo "* * * * * bash -c 'if [ ! \"\$(ps aux | grep leeTemperatura.py | grep -v grep)\" ]; then cd /home/pi/Desktop/scripts/leeTemperatura/ && nohup  ./leeTemperatura.py &>> /home/pi/Desktop/scripts/logs/leeTemperatura/leeTemperatura.log& fi'" >> /var/spool/cron/crontabs/pi
   fi
 
   if [ -z "$(crontab -l -u pi | grep who)" ];then
-    echo "* * * * * bash -c 'if [ ! \"\$(ps aux | grep who.sh | grep -v grep)\" ]; then cd /home/pi/Desktop/scripts/who/ && nohup  ./who.sh &>> /home/pi/Desktop/scripts/logs/who/who.log; fi'" >> /var/spool/cron/crontabs/pi
+    echo "* * * * * bash -c 'if [ ! \"\$(ps aux | grep who.sh | grep -v grep)\" ]; then cd /home/pi/Desktop/scripts/who/ && nohup  ./who.sh &>> /home/pi/Desktop/scripts/logs/who/who.log& fi'" >> /var/spool/cron/crontabs/pi
   fi
 else
   printf "\033[1;31m\n\nMust be run as:\nsudo ./install.sh 17\033[0m\n"

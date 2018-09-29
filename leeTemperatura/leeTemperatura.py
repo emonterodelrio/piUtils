@@ -47,7 +47,7 @@ def readTempHumHPa():
     temp = round( temp,2 )
     hum = round( hum, 2 )
     temp2 = round( temp2, 2 )
-    prs = round( prs, 2 )
+    prs = round( (prs/100.0), 2 )
     alt = round( alt, 2 )
     return (float(hum), temp, temp2, prs, alt)
   else:
