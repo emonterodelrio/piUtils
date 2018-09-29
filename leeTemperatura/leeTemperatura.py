@@ -28,13 +28,17 @@ def readTempHumHPa():
     print "Reading"
 
     temp2 = bmp.readTemperature()
+    sleep(1)
     # Read the current barometric pressure level
     prs = bmp.readPressure()
+    sleep(1)
     # To calculate altitude based on an estimated mean sea level pressure
     # (1013.25 hPa) call the function as follows, but this won't be very accurate
     alt = bmp.readAltitude()
+    sleep(1)
 
     hum ,temp = Adafruit_DHT.read_retry(sensor, pin)
+    sleep(1)
   except Exception:
     print "Error gettin info from sensor"  
 
