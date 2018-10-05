@@ -11,7 +11,7 @@ from Adafruit_BMP085 import BMP085
 
 api_keys = ["", "", "", ""]
 
-myDelay = 90 #how many seconds between posting data
+myDelay = 900 #how many seconds between posting data
 
 #Sensors
 #sensor = Adafruit_DHT.DHT11
