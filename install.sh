@@ -11,6 +11,16 @@ fi
 
 if [ `whoami` = root ]; then
 
+  printf "\033[1;32m\n\nSetup root ll alias\033[0m\n"
+  if [ -z $(cat /root/.bashrc | grep "alias ll") ]; then
+    echo "alias ll='ls -larth'" >> /root/.bashrc
+  fi
+  
+  printf "\033[1;32m\n\nSetup pi ll alias\033[0m\n"
+  if [ -z $(cat /home/pi/.bashrc | grep "\/home\/pi\/Desktop\/scripts") ]; then
+    echo "alias ll='ls -larth'" >> /home/pi/.bashrc
+  fi
+
   printf "\033[1;32m\n\nAuto cd to scripts \033[0m\n"
   if [ -z $(cat /home/pi/.bashrc | grep "\/home\/pi\/Desktop\/scripts") ]; then
     echo "cd /home/pi/Desktop/scripts" >> /home/pi/.bashrc
@@ -56,10 +66,12 @@ if [ `whoami` = root ]; then
   if [ -z "$(crontab -l -u pi | grep who)" ];then
     echo "* * * * * bash -c 'if [ ! \"\$(ps aux | grep who.sh | grep -v grep)\" ]; then cd /home/pi/Desktop/scripts/who/ && nohup  ./who.sh &>> /home/pi/Desktop/scripts/logs/who/who.log& fi'" >> /var/spool/cron/crontabs/pi
   fi
+  chown pi:pi /var/spool/cron/crontabs/pi
 else
   printf "\033[1;31m\n\nMust be run as:\nsudo ./install.sh 17\033[0m\n"
   exit 1
 fi
+
 
 
 printf "\033[1;32m\n\necho Setting port at leeTemperatura.py\033[0m\n"
